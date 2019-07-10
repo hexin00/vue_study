@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message" >
+    <button v-on:click="tijiao">提交</button>
+    <ul>
+        <todo-list v-bind:content="li" v-bind:index="index" v-for="(li,index) in lists" @delete="handleItemDelete" ></todo-list>
+    </ul>
+</div>
+</body>
+<script>
+    var todolist = {
+        props:['content','index'],
+        template:"<li @click='liclick'>{{content}}</li>",
+        methods:{
+            liclick:function () {
+                this.$emit('delete',this.index)
+            }
+        }
+    };
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            lists:[1,2,3],
+            message:''
+        },
+        methods:{
+            tijiao:function () {
+                this.$data.lists.push(this.$data.message)
+                this.$data.message = ''
+            },
+            handleItemDelete:function (index) {
+                this.$data.lists.splice(index,1)
+            }
+        },
+        components:{
+            TodoList:todolist
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue学习</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li-template v-for="lis in item" v-bind:li="lis"></li-template>
+    </ul>
+</div>
+</body>
+<script>
+    var li_template = {
+        props:['li'],
+        template:'<li><a :href="[li.href]"  > {{ li.title }} </a></li>'
+    };
+    var vm = new Vue({
+        el :'#app',
+        data:{
+            item:[
+                    {title:'todolist',href:'./todolist.html'},
+                    {title:'条件渲染',href:'./condition_draw.html'},
+                    {title:'列表渲染',href:'./list_draw.html'},
+                    {title:'轮播图',href:'./lunbo.html'},
+                    {title:'dom选择',href:'./ref.html'},
+                    {title:'setter and getter',href:'./setter_getter.html'},
+                    {title:'style样式更改',href:'./style.html'},
+                    {title:'v-once',href:'./v-once.html'},
+                    {title:'v-text',href:'./v-text.html'},
+                    {title:'组件计算',href:'./zujian_detail.html'},
+                    {title:'插槽',href:'./chacao.html'},
+                    {title:'插槽作用域',href:'./chazaoy.html'},
+                    {title:'父子组件传值',href:'./f_z_c_z.html'},
+                    {title:'组件数据产地',href:'./z_j_s_j_c_d.html'},
+                    {title:'组件数据产地',href:'./z_j_s_j_c_d.html'},
+                    {title:'非父子组件数据传递',href:'./not_child.html'},
+                    {title:'css动画',href:'./animation.html'},
+
+                    ],
+        },
+        components:{
+            LiTemplate:li_template
+        }
+    })
+</script>
+</html>

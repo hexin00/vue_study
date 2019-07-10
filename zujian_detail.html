@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <todo-list ref="one" @change="click_change"></todo-list>
+    <todo-list ref="two" @change="click_change"></todo-list>
+    <div>{{totail}}</div>
+</div>
+</body>
+<script>
+    Vue.component ("todo-list", {
+        template:'<div @click="handlerClick">{{num}}</div>',
+        data:function () {
+            return{
+                num:0
+            }
+        },
+        methods:{
+            handlerClick:function () {
+                this.num++
+                this.$emit('change')
+            }
+
+        }
+
+
+
+    });
+    var vm = new Vue({
+        el : '#app',
+        data:{
+            totail:0
+        },
+        methods:{
+            click_change:function () {
+                this.totail = this.$refs.one.num + this.$refs.two.num
+            }
+        }
+
+    })
+</script>
+</html>

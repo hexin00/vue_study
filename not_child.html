@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子之间的数据传递bus</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <comp content="dell"></comp>
+    <comp content="haier"></comp>
+</div>
+</body>
+<script>
+    Vue.prototype.bus = new Vue()
+    Vue.component('comp',{
+        props:{
+            content:String
+        },
+        data:function () {
+            return{
+                selfContent:this.content
+            }
+        },
+        template:'<div @click="child_click">{{selfContent}}</div>',
+        methods:{
+            child_click:function () {
+                this.bus.$emit('change',this.selfContent)
+            }
+        },
+        mounted:function () {
+            var this_ = this
+            this.bus.$on('change',function (msg) {
+                this_.selfContent = msg
+            })
+        }
+
+
+
+
+    })
+
+
+
+    var vm = new Vue({
+        el:'#app'
+    })
+</script>
+</html>

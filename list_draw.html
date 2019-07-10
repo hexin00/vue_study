@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-for="(item,key,index) of lists">
+        {{item}}------{{key}}-----{{index}}
+    </div>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            lists:
+                {
+                name:'username',
+                age:'19',
+                address:'hefei'
+                }
+
+
+        }
+    })
+
+</script>
+</html>

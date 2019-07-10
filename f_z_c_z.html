@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件传值</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <zujian :num="1" @change="handlerClick"></zujian>
+    <zujian :num="2" @change="handlerClick"></zujian>
+    <div>{{total}}</div>
+</div>
+</body>
+<script>
+    var zujian = {
+        props:['num'],
+        template:'<div @click="itemClick">{{z_num}}</div>',
+        data:function () {
+            return {
+                z_num:this.num
+            }
+        },
+        methods:{
+            itemClick:function () {
+                this.z_num+=2
+                this.$emit('change',2)
+            }
+        }
+
+    }
+
+
+    var vm = new Vue({
+        el : '#app',
+        data:{
+          total:3
+        },
+        components:{
+            zujian:zujian
+        },
+        methods:{
+            handlerClick:function (temp) {
+                this.total =this.total + temp
+            }
+        }
+    })
+</script>
+</html>

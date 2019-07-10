@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-if="abc === 'a' ">this is a</div>
+    <div v-else-if="abc === 'b' ">this is b</div>
+    <div v-else>this is other</div>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            abc:'a'
+
+        }
+    })
+
+</script>
+</html>

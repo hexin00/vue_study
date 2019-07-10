@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="item in lists">{{item}}</li>
+    </ul>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el :'#app',
+        data:{
+            lists:{
+                username:'username',
+                password:'password',
+                age:'11'
+            }
+        }
+    })
+</script>
+</html>

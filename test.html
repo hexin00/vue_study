@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<style>
+nav{
+    height: 100px;
+    background: olivedrab;
+}
+    ul li{
+        display: inline-block;
+        padding: 20px;
+        border: 1px solid black;
+
+    }
+    .bgred{
+        background: red;
+    }
+</style>
+<body>
+<header id="app">
+    <nav>
+        <ul>
+            <nav-li :class="{bgred:item == ii}" v-bind:index_key="index"  v-bind:content="item"  v-for="(item,index) of lists" @change_color="change_co(item)"></nav-li>
+        </ul>
+    </nav>
+</header>
+</body>
+<script>
+    var nav_li = {
+        props:['index_key','content'],
+        template:"<li  @click='cla' ><a href='' >{{content}}</a></li>",
+        methods:{
+            cla:function () {
+                this.$emit('change_color',this.index_key)
+            },
+
+        }
+    }
+
+
+
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            lists:['a','b','c','d'],
+
+            ii : ''
+
+        },
+        components:{
+          NavLi:nav_li
+        },
+        mounted:function () {
+          this.ii = this.lists[0]
+        },
+        methods:{
+            change_co:function (item) {
+
+                this.ii = item
+            }
+
+        }
+    })
+</script>
+</html>

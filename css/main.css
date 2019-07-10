@@ -1,0 +1,16 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+header{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 41%;
+}
+.lunbo_img{
+}
+.list{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 10%;
+}

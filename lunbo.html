@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<style>
+    img{
+        width: 200px;
+    }
+    .action{
+        border: 1px solid red;
+    }
+</style>
+<body>
+<div id="app">
+    <template v-for="(src,index) of srcs">
+        <img   v-bind:src='src' alt="" @mouseleave="_on" @mouseenter="_stop" :class="{action:temp == index}"/>
+    </template>
+
+
+</div>
+</body>
+<script>
+
+    var vm = new Vue({
+        el : '#app',
+        data:{
+            srcs:['img/WechatIMG56.jpeg','img/WechatIMG60.jpeg','img/WechatIMG98.jpeg'],
+            temp:0,
+            dingshiqi:''
+        },
+        mounted:function () {
+           this._start()
+        },
+        methods:{
+            autoplay:function () {
+                //自动播放
+                console.log(this.temp)
+                this.temp++
+                if(this.temp>this.srcs.length -1){
+                    this.temp = 0
+                }
+
+            },
+            _start:function () {
+                //开启自动播放
+                this.dingshiqi = setInterval(this.autoplay,2000)
+            },
+            _stop:function () {
+                //停止播放
+                clearInterval(this.dingshiqi)
+            },
+            _on:function () {
+                //继续播放
+                this._start()
+            }
+        }
+
+
+    })
+</script>
+</html>

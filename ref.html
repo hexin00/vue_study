@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom选择</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div ref="hello" id="app" @click="handler_click">
+    hello word
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        methods:{
+            handler_click:function () {
+                console.log(this.$refs.hello)
+            }
+        }
+    })
+
+</script>
+</html>
