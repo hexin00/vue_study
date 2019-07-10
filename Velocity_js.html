@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中js动画与velocity.js结合</title>
+    <script src="js/vue2.0.js"></script>
+    <script src="js/velocity.js"></script>
+
+</head>
+<!--
+开始显示动画之前
+    @before-enter="handleBeforeEnter"   el.style.color改变颜色
+显示中
+    @enter="handleEnter"    el,done
+显示结束
+    @after-enter="handleAfterEnter" el
+
+开始隐藏动画之前
+    @before-leave="handleBeforeLeave"   el.style.color改变颜色
+隐藏中
+    @leave="handleLeave"    el,done
+隐藏结束
+    @after-leave="handleAfterLeave" el
+-->
+<body>
+<div id="app">
+    <transition
+            name="fade"
+            @before-enter="handleBeforeEnter"
+            @enter="handleEnter"
+            @after-enter="handleAfterEnter"
+    >
+        <div v-if="show"><h1>hello word</h1></div>
+    </transition>
+    <button @click="handerClick">点击</button>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:true
+        },
+        methods:{
+            handerClick:function () {
+                this.show = !this.show
+            },
+            handleBeforeEnter:function (el) {
+                el.style.color='yellow'
+                el.style.opacity=0
+            },
+            handleEnter:function (el,done) {
+                /*
+                2秒之后变成红色，在2秒之后变成黑色
+
+                setTimeout(function () {
+                    el.style.color='red'
+                },2000)
+                setTimeout(function () {
+                    done()
+                },4000)
+                 */
+                //                                      完成执行函数
+                Velocity(el,{opacity:1},{duration:2000,complete:done})
+            },
+            handleAfterEnter:function (el) {
+               el.style.color='black'
+            }
+        }
+
+    })
+</script>
+</html>

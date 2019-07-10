@@ -25,6 +25,13 @@
                     添加fade-leave-active 自定义类，一值存在
                 动画效果
                     添加 animated jello
+         执行时间以transition为准
+            type='transition'
+         自定义统一时间，毫秒
+            :duration='1000'
+                        入场          离场
+            :duration={enter:50000,leave:10000}
+
 
 
     */
@@ -34,7 +41,7 @@
     }
     .fade-leave-active,
     .fade-enter-active{
-        transition: opacity 3s;
+        transition: opacity 1s;
     }
 
 
@@ -45,6 +52,7 @@
     </transition>
     <!--使用animated库-->
     <transition
+            :duration='1000'
             name="fade"
             enter-active-class="animated bounce fade-enter-active"
             leave-active-class="animated jello fade-leave-active"
