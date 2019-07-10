@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同时使用动画效果和过度效果</title>
+    <script src="js/vue2.0.js"></script>
+    <link rel="stylesheet" href="css/animation.css">
+</head>
+<style>
+    /*
+    流程说明
+        加载时显示动画效果
+            添加属性 appear appear-active-class
+        点击
+            动画隐藏
+                过度效果
+                    添加name为fade
+                    添加fade-enter-active 自定义类，一值存在
+                动画效果
+                    添加 animated bounce
+        点击
+            动画显示
+                过度效果
+                    添加name为fade
+                    添加fade-leave-active 自定义类，一值存在
+                动画效果
+                    添加 animated jello
+
+
+    */
+    .fade-enter,
+    .fade-leave-to{
+        opacity: 0;
+    }
+    .fade-leave-active,
+    .fade-enter-active{
+        transition: opacity 3s;
+    }
+
+
+
+</style>
+<body>
+<div id="app">
+    </transition>
+    <!--使用animated库-->
+    <transition
+            name="fade"
+            enter-active-class="animated bounce fade-enter-active"
+            leave-active-class="animated jello fade-leave-active"
+            appear
+            appear-active-class="animated bounce"
+
+    >
+        <div v-if="show"><h1>hello word</h1></div>
+    </transition>
+    <button @click="handerClick">点击</button>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:true
+        },
+        methods:{
+            handerClick:function () {
+                this.show = !this.show
+            }
+        }
+
+    })
+</script>
+</html>

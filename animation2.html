@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue中使用animation.css库</title>
+    <script src="js/vue2.0.js"></script>
+    <link rel="stylesheet" href="css/animation.css">
+</head>
+<style>
+    /*
+    流程说明
+    点击
+    动画隐藏
+        .fade-leave-active
+        animation:bounce-in动画效果 reverse反向执行100%->50%->0%
+    点击
+    动画显示
+        .fade-enter-active
+        animation:bounce-in动画效果
+
+    自定义类
+       设置transition属性enter-active-class和leave-active-class值为自定义的类
+    使用animation库
+        https://daneden.github.io/animate.css/
+        设置transition属性animated 自定义
+        enter-active-class="animated bounce"
+        leave-active-class="animated jello"
+
+    */
+    /*自定义动画效果*/
+    @keyframes bounce-in {
+        0%{
+            transform: scale(0);
+        }
+        50%{
+            transform: scale(1.5);
+        }
+        100%{
+            transform: scale(2);
+        }
+    }
+    /*
+    动画显示
+    */
+    /* 用法，设置transition name = 'fade'
+    .fade-enter-active{
+        transform-origin: left center;
+        animation: bounce-in 1s;
+    }*/
+    /* 自定义类显示 */
+    .active{
+        transform-origin: left center;
+        animation: bounce-in 1s;
+    }
+
+    /*
+    动画隐藏
+    */
+    /* 用法，设置transition name = 'fade'
+    .fade-leave-active{
+        transform-origin: left center;
+        animation: bounce-in 1s reverse;
+    }*/
+    /* 自定义类隐藏 */
+    .leave{
+        transform-origin: left center;
+        animation: bounce-in 1s reverse;
+    }
+</style>
+<body>
+<div id="app">
+    <!--<transition name="fade"> name为自定义名称，和css相对应 name='fade' css  .fade-enter-->
+    <!--
+    自定义动画类名称
+     enter-active-class显示
+     leave-active-class隐藏
+    -->
+    <transition name="fade"
+                enter-active-class="active"
+                leave-active-class="leave"
+    >
+        <div v-if="show">hello word</div>
+    </transition>
+    <!--使用animated库-->
+    <transition
+                enter-active-class="animated bounce"
+                leave-active-class="animated jello"
+    >
+        <div v-if="show">hello word</div>
+    </transition>
+    <button @click="handerClick">点击</button>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:true
+        },
+        methods:{
+            handerClick:function () {
+                this.show = !this.show
+            }
+        }
+
+    })
+</script>
+</html>

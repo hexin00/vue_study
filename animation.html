@@ -2,10 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>css动画</title>
+    <title>css动画过度效果</title>
     <script src="js/vue2.0.js"></script>
 </head>
 <style>
+    /*流程
+    点击
+        隐藏
+            第一针opacity 为1(显示)  第二针opacity为0(隐藏) transition监听opacity变化并作出改变
+            fade-leave              fade-leave-to           fade-leave-active
+    点击
+        显示
+            第一针opacity 为0(显示)  第二针opacity为1(默认为1) transition监听opacity变化并作出改变
+            fade-enter              fade-enter-to           fade-enter-active
+    */
     .fade-enter{
         opacity: 0;
     }
@@ -25,6 +35,17 @@
     .fade-leave-to{
         opacity: 0;
     }
+    /*
+    合并写法
+    .fade-enter,
+    .fade-leave-to{
+        opacity: 0;
+    }
+    .fade-leave-active,
+    .fade-enter-active{
+        transition: opacity 3s;
+    }
+    */
 </style>
 <body>
 <div id="app">
