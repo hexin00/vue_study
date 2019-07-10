@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多个元素或组件的过渡</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<style>
+    .fade-enter,
+    .fade-leave-to{
+        opacity: 0;
+    }
+    .fade-leave-active,
+    .fade-enter-active{
+        transition: opacity 1s;
+    }
+</style>
+<body>
+<div id="app">
+    <!--
+        添加key值
+        mode    in-out 先显示后隐藏  out-in   先隐藏后显示
+    -->
+    <transition name="fade" mode="out-in">
+        <div v-if="show" key="hello">hello word</div>
+        <div v-else key="by">bye bye</div>
+    </transition>
+    <!--
+    动态组件切换
+    -->
+    <transition name="fade" mode="out-in">
+        <component :is="type"></component>
+    </transition>
+    <button @click="handerClick">点击</button>
+</div>
+</body>
+<script>
+    Vue.component('child',{
+        template:'<div>child</div>'
+    })
+    Vue.component('child-one',{
+        template:'<div>child-one</div>'
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:true,
+            type:'child'
+        },
+        methods:{
+            handerClick:function () {
+                this.show = !this.show
+                this.type = this.type === 'child'?'child-one':'child'
+            }
+        }
+
+    })
+</script>
+</html>
