@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画的封装</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--
+    定义组件
+        定义slot的js动画，父组件数据绑定的形式来控制
+    -->
+    <child :show="show">
+        <div>hello word</div>
+    </child>
+    <child :show="show">
+        <h1>hello word</h1>
+    </child>
+    <button @click="handerClick">提交</button>
+
+
+</div>
+</body>
+<script>
+    Vue.component('child',{
+        props:['show'],
+        template:`
+        <transition
+            name="fade"
+            @before-enter="handleBeforeEnter"
+            @enter="handleEnter"
+        >
+        <slot v-if="show"></slot>
+        </transition>
+        `,
+        methods:{
+            handleBeforeEnter:function (el) {
+                el.style.color='red'
+            },
+            handleEnter:function (el,done) {
+                setTimeout(function () {
+                    el.style.color='green'
+                    done()
+                },2000)
+            }
+        }
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            show:true
+        },
+        methods:{
+            handerClick:function () {
+                this.show = !this.show
+            }
+        }
+
+    })
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue列表过渡</title>
+    <script src="js/vue2.0.js"></script>
+</head>
+<style>
+    .fade-enter,
+    .fade-leave-to{
+        opacity: 0;
+    }
+    .fade-leave-active,
+    .fade-enter-active{
+        transition: opacity 3s;
+    }
+</style>
+<body>
+<div id="app">
+    <!--
+    列表项包裹  transition-group
+    每个元素都被transition包裹
+    <transition>
+        <div>hello word</div>
+    </transition>
+    -->
+    <transition-group name="fade">
+        <div v-for="item in lists" :key="item.id">
+            {{item.title}}
+        </div>
+    </transition-group>
+    <button @click="handerClick">点击</button>
+</div>
+</body>
+<script>
+    var count = 0
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            lists:[]
+        },
+        methods:{
+            handerClick:function () {
+                this.lists.push({
+                    id:count++,
+                    title:'hello word'
+                })
+            }
+        }
+
+    })
+</script>
+</html>

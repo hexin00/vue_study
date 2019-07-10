@@ -7,6 +7,11 @@
 </head>
 <body>
 <div id="app">
+    <!--
+    执行流程
+    定义组件child
+        slot-scope="props"  接收slot传递的数据
+    -->
     <child>
         <template slot-scope="props">
             <li  @click="child_click">{{props.item}}</li>
